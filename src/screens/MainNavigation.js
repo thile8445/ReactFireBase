@@ -6,6 +6,7 @@ import Information from './Information';
 import Loading from './Loading';
 import Login from './Login';
 import Main from './Main';
+import Register from './Register';
 const Tab = createBottomTabNavigator();
 const NavigateIntoMain = () => {
   return (
@@ -44,14 +45,14 @@ const LoadingNavigation = () => {
         component={Login}
       />
       <AuthStack.Screen
-        name="SignIn"
+        name="Register"
         options={() => ({
-          title: 'SignIn',
+          title: 'Register',
           headerStyle: {
             backgroundColor: '#FEA47F',
           },
         })}
-        component={Information}
+        component={Register}
       />
     </AuthStack.Navigator>
   );

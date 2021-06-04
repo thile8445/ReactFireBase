@@ -14,7 +14,7 @@ class Main extends Component {
       firebase
         .auth()
         .signOut()
-        .then(() => this.props.navigation.navigate('Loading'))
+        .then(() => this.props.navigation.navigate('Login'))
         .catch(error => this.setState({errorMessage: error.message}));
     }
   };

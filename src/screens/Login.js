@@ -10,8 +10,7 @@ class Login extends Component {
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
-        .then(rs => {
-          console.log(rs);
+        .then(() => {
           this.props.navigation.replace('Main');
         })
         .catch(error => this.setState({errorMessage: error.message}));
@@ -49,7 +48,7 @@ class Login extends Component {
         <Button title="Login" onPress={this.handleLogin} />
         <Button
           title="Don't have an account? Sign Up"
-          onPress={() => this.props.navigation.navigate('SignUp')}
+          onPress={() => this.props.navigation.navigate('Register')}
         />
       </View>
     );
