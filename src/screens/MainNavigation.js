@@ -33,24 +33,22 @@ const NavigateIntoMain = () => {
   );
 };
 const AuthStack = createStackNavigator();
-const LoadingNavigation = () => {
+const LoginNavigation = () => {
   return (
-    <AuthStack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}>
+    <AuthStack.Navigator>
       <AuthStack.Screen
         initialRouteName="Login"
         name="Login"
+        options={() => ({
+          title: 'Login',
+          headerLeft: null,
+        })}
         component={Login}
       />
       <AuthStack.Screen
         name="Register"
         options={() => ({
           title: 'Register',
-          headerStyle: {
-            backgroundColor: '#FEA47F',
-          },
         })}
         component={Register}
       />
@@ -73,7 +71,7 @@ export const MainNavigation = () => {
       <HomeStack.Screen
         initialRouteName="Login"
         name="Login"
-        component={LoadingNavigation}
+        component={LoginNavigation}
       />
       <HomeStack.Screen
         name="Main"

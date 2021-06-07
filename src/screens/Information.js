@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
-
+// import firestore from '@react-native-firebase/firestore';
 class Information extends Component {
+  // componentDidMount() {
+  //   const usersCollection = firestore().collection('react_db');
+  //   console.log(usersCollection);
+  // }
   render() {
     return (
       <View style={styles.container}>

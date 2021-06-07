@@ -1,23 +1,25 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, TextInput, View, Button, Alert} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  Image,
+  Alert,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import {firebase} from '../firebase/config';
 import {EMAIL} from '../helpers/Regexs';
 class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //   email: {
-      //     value: '',
-      //     isInputValid: true,
-      //     errorMessage: '',
-      //   },
       email: '',
       password: '',
       confirmPassword: '',
       errorMessage: null,
     };
-    // this.handleInput = this.handleInput.bind();
-    // this.handValid = this.handValid.bind();
   }
   goLogin = () => {
     this.props.navigation.navigate('Login');
@@ -25,25 +27,10 @@ class Register extends Component {
   isEmailValid = email => {
     const checkEmailResult = EMAIL.test(email);
     return checkEmailResult;
-    // if (checkEmailResult) {
-    //   return {isInputValid: true, errorMessage: ''};
-    // } else {
-    //   return {isInputValid: false, errorMessage: 'it not a type mail'};
-    // }
   };
   isPasswordEqual = (password, confirmPassword) => {
     return password === confirmPassword;
   };
-  //   handleInput = email => {
-  //     this.setState({
-  //       email: {value: email, isInputValid: true, errorMessage: ''},
-  //     });
-  //   };
-  //   handValid = () => {
-  //     const {value} = this.state.email;
-  //     const resultCheckEmail = this.validateEmail(value);
-  //     console.log(resultCheckEmail);
-  //   };
   handleLogin = () => {
     const {email, password, confirmPassword} = this.state;
     if (
@@ -70,39 +57,52 @@ class Register extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Register</Text>
-        {this.state.errorMessage && (
-          <Text style={{color: 'red'}}>{this.state.errorMessage}</Text>
-        )}
-        <TextInput
-          style={styles.textInput}
-          autoCapitalize="none"
-          placeholder="Email"
-          onChangeText={email => this.setState({email})}
-          value={this.state.email}
-          //   onBlur={this.handValid}
-        />
-        <TextInput
-          secureTextEntry
-          style={styles.textInput}
-          autoCapitalize="none"
-          placeholder="Password"
-          onChangeText={password => this.setState({password})}
-          value={this.state.password}
-        />
-        <TextInput
-          secureTextEntry
-          style={styles.textInput}
-          autoCapitalize="none"
-          placeholder="Confirm password"
-          onChangeText={confirmPassword => this.setState({confirmPassword})}
-          value={this.state.confirmPassword}
-        />
-        <Button title="Register" onPress={this.handleLogin} />
-        <Button
-          title="Login"
-          onPress={() => this.props.navigation.navigate('Login')}
-        />
+        <ScrollView style={styles.scrollViewStyle}>
+          <Image
+            style={styles.img}
+            source={require('../../assets/images/touchicon.png')}
+          />
+          {this.state.errorMessage && (
+            <Text style={{color: 'red'}}>{this.state.errorMessage}</Text>
+          )}
+          <TextInput
+            style={styles.textInput}
+            autoCapitalize="none"
+            placeholder="Email"
+            onChangeText={email => this.setState({email})}
+            value={this.state.email}
+            //   onBlur={this.handValid}
+          />
+          <TextInput
+            secureTextEntry
+            style={styles.textInput}
+            autoCapitalize="none"
+            placeholder="Password"
+            onChangeText={password => this.setState({password})}
+            value={this.state.password}
+          />
+          <TextInput
+            secureTextEntry
+            style={styles.textInput}
+            autoCapitalize="none"
+            placeholder="Confirm password"
+            onChangeText={confirmPassword => this.setState({confirmPassword})}
+            value={this.state.confirmPassword}
+          />
+          <TouchableOpacity style={styles.buttonSubmit}>
+            <Text style={styles.buttonTitle}>Create account</Text>
+          </TouchableOpacity>
+          <View style={styles.footerView}>
+            <Text style={styles.footerText}>
+              Already got an account ?
+              <Text
+                style={styles.footerLink}
+                onPress={() => this.props.navigation.navigate('Login')}>
+                Login
+              </Text>
+            </Text>
+          </View>
+        </ScrollView>
       </View>
     );
   }
@@ -113,12 +113,55 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  textWarning: {
+    color: 'red',
+  },
   textInput: {
     height: 40,
     width: '90%',
     borderColor: 'gray',
-    borderWidth: 1,
-    marginTop: 8,
+    marginVertical: 10,
+    // marginHorizontal: 30,
+    marginLeft: '5%',
+    backgroundColor: 'white',
+    overflow: 'hidden',
+    paddingLeft: 10,
+  },
+  scrollViewStyle: {
+    flex: 1,
+    width: '100%',
+  },
+  buttonSubmit: {
+    height: 40,
+    width: '90%',
+    marginLeft: '5%',
+    backgroundColor: '#788eec',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonTitle: {
+    fontSize: 16,
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  footerView: {
+    alignItems: 'center',
+    marginVertical: 20,
+  },
+  footerText: {
+    fontSize: 16,
+    color: '#2e2e2d',
+  },
+  footerLink: {
+    fontSize: 16,
+    color: '#788eec',
+    fontWeight: 'bold',
+  },
+  img: {
+    height: 120,
+    width: 90,
+    margin: 30,
+    alignSelf: 'center',
   },
 });
 
